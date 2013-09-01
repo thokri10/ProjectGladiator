@@ -1,6 +1,8 @@
 #pragma strict
 private var hit:RaycastHit;
 private var enemy:Transform;
+private var anim:Animator;
+var v_input:float = 0;
 var firstperson:boolean = false;
 var tilt:float = 0;
 var max_tilt:float = 60;
@@ -10,10 +12,13 @@ var speed:float = 4;
 function Start () 
 {
 	Screen.lockCursor = true;
+	anim = GetComponent(Animator);
 }
 
 function Update () 
 {
+	anim.SetFloat("v_input", Input.GetAxis("Vertical"));
+	
 	rigidbody.velocity = transform.right * Input.GetAxis("Horizontal") * speed * 0.5 + transform.forward * Input.GetAxis("Vertical") * speed;
 	
 	if (Input.GetMouseButtonDown(0))
@@ -34,12 +39,10 @@ function MoveCamera()
 	if (firstperson)
 	{
 		Camera.main.transform.position = transform.position + transform.up + transform.forward * 0.01;
-		Camera.main.nearClipPlane = 0.3555;
 	}
 	else
 	{
 		Camera.main.transform.position = transform.position + transform.up * 2 - transform.forward * 2;
-		Camera.main.nearClipPlane = 0.3555;
 	}
 	
 	if (enemy != null)
