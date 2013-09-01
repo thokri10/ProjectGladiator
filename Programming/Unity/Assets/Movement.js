@@ -39,7 +39,7 @@ function MoveCamera()
 	else
 	{
 		Camera.main.transform.position = transform.position + transform.up * 2 - transform.forward * 2;
-		Camera.main.nearClipPlane = 2;
+		Camera.main.nearClipPlane = 0.3555;
 	}
 	
 	if (enemy != null)
