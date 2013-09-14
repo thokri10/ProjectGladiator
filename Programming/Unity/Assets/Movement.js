@@ -6,6 +6,7 @@ var v_input:float = 0;
 var firstperson:boolean = false;
 var tilt:float = 0;
 var max_tilt:float = 60;
+var oculus:boolean = false;
 
 var speed:float = 4;
 
@@ -19,11 +20,13 @@ function Update ()
 {
 	anim.SetFloat("v_input", Input.GetAxis("Vertical"));
 	
-	rigidbody.velocity = transform.right * Input.GetAxis("Horizontal") * speed * 0.5 + transform.forward * Input.GetAxis("Vertical") * speed;
+	rigidbody.velocity = transform.right * Input.GetAxis("Horizontal") * speed * 0.7 + transform.forward * Input.GetAxis("Vertical") * speed;
 	
 	if (Input.GetMouseButtonDown(0))
 	{
-		LockCamera();
+		//LockCamera();
+		oculus = !oculus;
+		
 	}
 	
 	if (Input.GetKeyDown(KeyCode.Q))
@@ -38,7 +41,7 @@ function MoveCamera()
 {
 	if (firstperson)
 	{
-		Camera.main.transform.position = transform.position + transform.up + transform.forward * 0.01;
+		Camera.main.transform.position = transform.position + transform.up * 0.74 + transform.forward * 0.01;
 	}
 	else
 	{
